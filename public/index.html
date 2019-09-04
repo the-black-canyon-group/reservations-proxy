@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>FEC Demo</title>
+    <script src="https://kit.fontawesome.com/7c4580de60.js"></script>
+  </head>
+  <body style="display: block;">
+    <div style="border:1px solid black; display: flex">
+      <div>
+        <div id="Reservations" style='position: -webkit-sticky;position:sticky;right:1;'>TEST</div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+      <div id="app">TEST</div>
+    </div>
+    <div>
+      <div id="Reviews">TEST</div>
+    </div>
+    <div>
+      <div id="NearbyPlaces">TEST</div>
+  </div>
+<!-- These two lines are just one way to get the React library running in the client's browser -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+    <script type="module" src="http://localhost:3003/bundle.js"></script>
+    <script src="http://localhost:3001/bundle.js"></script>
+    <script src="http://localhost:3002/bundle.js"></script>
+    <script src="http://localhost:3004/bundle.js"></script>
+    <!-- see: https://reactjs.org/docs/react-without-jsx.html -->
+    <script>
+    const uriParts = document.baseURI.toString().split('/');
+    console.log('URI:', uriParts);
+    let homestayId = 1;
+    if (uriParts.includes('listing') && uriParts.length > 2) {
+      homestayId = uriParts[uriParts.length - 2];
+    }
+
+    ReactDOM.render(
+      React.createElement(NearbyService, {id:homestayId}),
+      document.getElementById('NearbyPlaces')
+    );
+
+    ReactDOM.render(
+        React.createElement(Reviews.default),
+        document.getElementById('Reviews')
+      );
+    </script>
+  </body>
+</html>
